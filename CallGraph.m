@@ -5,6 +5,9 @@ rootFunction = 'matRad_calcPhotonDose.m';
 % Output path for the JSON
 outputPath = 'D:\Git\CallGraph\';
 
+% Add all sub directories to the path
+AddDirs(rootFolder);
+
 % Build the call graph by recursively going through the subsequent
 % function calls
 callGraph = GetCallGraph([rootFolder rootFunction]);
