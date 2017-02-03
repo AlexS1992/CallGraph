@@ -1,20 +1,23 @@
 % Root folder and root function to analyse
 rootFolder = 'D:\Git\matRad\';
-rootFunction = 'matRad_calcPhotonDose.m';
+rootFunction = 'matRad.m';
 
 % Output path for the JSON
-outputPath = 'D:\Git\CallGraph\';
+outputPath = 'D:\Git\CallGraph\callGraph.JSON';
 
 % Add all sub directories to the path
 AddDirs(rootFolder);
 
 % Build the call graph by recursively going through the subsequent
 % function calls
-callGraph = GetCallGraph([rootFolder rootFunction]);
+functionCalls = GetFunctionCalls([rootFolder rootFunction]);
 
 % Trim the file path names down and get the subdirectory structure beneath
 % the root directory
-callGraph = TrimCallGraphNodes(callGraph, rootFolder);
+functionCalls = TrimFunctionNodes(functionCalls, rootFolder);
+
+% Build struct representing the callGraph
+callGraphStruct = CreateSimpleCallGraph(functionCalls);
 
 % Export a JSON containing the call graph
-ExportCallGraphAsJSON(callGraph, outputPath);
+ExportStructAsJSON(callGraphStruct, outputPath);

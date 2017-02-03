@@ -1,7 +1,7 @@
 % Find all subsequent called nodes of the elements given in nodes and add
 % all links between these functions
-% node is expected to be a complete filenames of .m file
-function [callGraph] = GetCallGraph(node, callGraph)
+% Node is expected to be a complete filenames of .m file
+function [callGraph] = GetFunctionCalls(node, callGraph)
 
 if (nargin <= 0)
     return 
@@ -31,7 +31,7 @@ callGraph.Nodes = [callGraph.Nodes, newNodes];
 
 % Recursive call to run all childs
 for i = 1 : length(newNodes)
-    callGraph = GetCallGraph(newNodes{i}, callGraph);
+    callGraph = GetFunctionCalls(newNodes{i}, callGraph);
 end
 
 end
